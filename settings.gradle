@@ -1,2 +1,5 @@
-rootProject.name = 'spring-kotlin-gradle-template'
+rootProject.name = 'spring-kafka'
+include 'producer-server'
+include 'producer-support'
+include 'consumer-server'
 

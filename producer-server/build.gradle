@@ -1,0 +1,7 @@
+dependencies {
+    implementation project(":producer-support")
+}
+
+application {
+    mainClass = "${groupId}.ApplicationKt"
+}

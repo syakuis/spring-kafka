@@ -1,8 +1,0 @@
-logging:
-  level:
-    io.github.syakuis: info
-  file:
-    path:
-spring:
-  main:
-    banner-mode: log

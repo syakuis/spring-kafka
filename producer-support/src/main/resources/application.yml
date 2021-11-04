@@ -1,0 +1,10 @@
+logging:
+  level:
+    root: info
+    io.github.syakuis: trace
+    org.springframework.web: info
+server:
+  port: 8080
+spring:
+  main:
+    banner-mode: console

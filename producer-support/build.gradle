@@ -1,0 +1,11 @@
+application {
+    mainClass = "${groupId}.ApplicationKt"
+}
+
+bootJar {
+    enabled false
+}
+
+jar {
+    enabled true
+}
