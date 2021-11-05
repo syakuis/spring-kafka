@@ -1,2 +1,5 @@
-##
-POST http://localhost:8080/notify/basic/11
+###
+POST http://localhost:8080/notify/is-null-key
+
+###
+POST http://localhost:8080/notify/is-exists-key/0

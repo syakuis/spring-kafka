@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/notify")
 class NotifyRestController(private val kafkaTemplate: KafkaTemplate<Int, String>) {
-    @PostMapping("/basic/{key}")
+    @PostMapping("/is-null-key")
     @ResponseStatus(HttpStatus.OK)
-    fun message(@PathVariable("key") key: Int = 1) {
-        kafkaTemplate.send(KafkaProperties.topicName, key, "aaaa")
+    fun isNullKey() {
+        kafkaTemplate.send(KafkaProperties.topicName, "키가 없습니다.")
+    }
+
+    @PostMapping("/is-exists-key/{key}")
+    @ResponseStatus(HttpStatus.OK)
+    fun isExistsKey(@PathVariable("key") key: Int = 1) {
+        kafkaTemplate.send(KafkaProperties.topicName, key, "key 는 $key 입니다.")
     }
 }
