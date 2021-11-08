@@ -6,6 +6,8 @@ package io.github.syakuis.kafka
  */
 class KafkaProperties {
     companion object {
-        const val topicName = "sample-topic"
+        const val basicTopicName = "basic-topic"
+        const val keyTopicName = "key-topic"
+        const val ackTopicName = "ack-topic"
     }
 }

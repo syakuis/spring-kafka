@@ -1,5 +1,8 @@
 ###
-POST http://localhost:8080/notify/is-null-key
+POST http://localhost:8080/notify/producer/basic
 
 ###
-POST http://localhost:8080/notify/is-exists-key/0
+POST http://localhost:8080/notify/producer/keys/2
+
+###
+POST http://localhost:8080/notify/producer/ack
