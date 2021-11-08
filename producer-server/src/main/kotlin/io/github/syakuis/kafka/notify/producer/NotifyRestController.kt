@@ -4,6 +4,7 @@ import io.github.syakuis.kafka.KafkaProperties
 import org.springframework.http.HttpStatus
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.web.bind.annotation.*
+import java.util.stream.Stream
 
 /**
  * @author Seok Kyun. Choi.
@@ -15,12 +16,14 @@ class NotifyRestController(private val kafkaTemplate: KafkaTemplate<Int, String>
     @PostMapping("/is-null-key")
     @ResponseStatus(HttpStatus.OK)
     fun isNullKey() {
-        kafkaTemplate.send(KafkaProperties.topicName, "키가 없습니다.")
+        (1..10).forEach {
+            kafkaTemplate.send(KafkaProperties.topicName, "$it 키가 없습니다.")
+        }
     }
 
     @PostMapping("/is-exists-key/{key}")
     @ResponseStatus(HttpStatus.OK)
-    fun isExistsKey(@PathVariable("key") key: Int = 1) {
+    fun isExistsKey(@PathVariable("key") key: Int = 0) {
         kafkaTemplate.send(KafkaProperties.topicName, key, "key 는 $key 입니다.")
     }
 }

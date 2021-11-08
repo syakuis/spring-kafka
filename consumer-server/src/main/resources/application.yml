@@ -4,7 +4,7 @@ logging:
     io.github.syakuis: trace
     org.springframework.web: info
 server:
-  port: 8080
+  port: 8081
 spring:
   main:
     banner-mode: console

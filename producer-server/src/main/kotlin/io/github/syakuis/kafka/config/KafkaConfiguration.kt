@@ -25,7 +25,7 @@ class KafkaConfiguration {
     lateinit var bootstrapServers: String
 
     @Bean
-    fun topic(): NewTopic = TopicBuilder.name(KafkaProperties.topicName).partitions(3).replicas(1).build()
+    fun topic(): NewTopic = TopicBuilder.name(KafkaProperties.topicName).partitions(1).replicas(1).build()
 
     @Bean
     fun producerFactory(): ProducerFactory<Int, String> = DefaultKafkaProducerFactory(

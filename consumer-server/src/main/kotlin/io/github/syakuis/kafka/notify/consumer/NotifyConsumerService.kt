@@ -4,6 +4,8 @@ import io.github.syakuis.kafka.KafkaProperties
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.annotation.TopicPartition
+import org.springframework.kafka.support.KafkaHeaders
+import org.springframework.messaging.handler.annotation.Header
 import org.springframework.messaging.handler.annotation.Payload
 import org.springframework.stereotype.Service
 
@@ -14,8 +16,12 @@ import org.springframework.stereotype.Service
 @Service
 class NotifyConsumerService {
     private val log = LoggerFactory.getLogger(NotifyConsumerService::class.java)
-    @KafkaListener(topicPartitions = [TopicPartition(topic = KafkaProperties.topicName, partitions = ["0"])])
-    fun receive(@Payload message: String) {
-        log.debug("{}", message)
+    @KafkaListener(id = "notify", topicPartitions = [TopicPartition(topic = KafkaProperties.topicName, partitions = ["0"])])
+    fun receive(@Payload message: String,
+                @Header(KafkaHeaders.GROUP_ID) groupId: String,
+                @Header(KafkaHeaders.RECEIVED_PARTITION_ID) partitionId: Int,
+                @Header(KafkaHeaders.OFFSET) offset: Int
+    ) {
+        log.debug("groupId: {}, partition: {}, offset: {} -> {}", groupId, partitionId, offset, message)
     }
 }
