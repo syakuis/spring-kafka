@@ -22,4 +22,7 @@ class KafkaConfiguration {
 
     @Bean
     fun ackTopic(): NewTopic = TopicBuilder.name(KafkaProperties.keyTopicName).partitions(1).replicas(1).build()
+
+    @Bean
+    fun retryTopic(): NewTopic = TopicBuilder.name(KafkaProperties.retryTopicName).partitions(1).replicas(1).build()
 }

@@ -9,5 +9,6 @@ class KafkaProperties {
         const val basicTopicName = "basic-topic"
         const val keyTopicName = "key-topic"
         const val ackTopicName = "ack-topic"
+        const val retryTopicName = "retry-topic"
     }
 }

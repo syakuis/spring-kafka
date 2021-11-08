@@ -1,6 +1,7 @@
 package io.github.syakuis.kafka.notify.producer
 
 import io.github.syakuis.kafka.KafkaProperties
+import io.github.syakuis.kafka.MessagePayload
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.IntegerSerializer
 import org.apache.kafka.common.serialization.StringSerializer
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.kafka.core.DefaultKafkaProducerFactory
 import org.springframework.kafka.core.KafkaTemplate
+import org.springframework.kafka.support.serializer.JsonSerializer
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -72,5 +74,18 @@ class NotifyRestController {
         ))
 
         kafkaTemplate.send(KafkaProperties.ackTopicName, "ack", "ok")
+    }
+
+    @PostMapping("/retry")
+    @ResponseStatus(HttpStatus.OK)
+    fun retry() {
+        val kafkaTemplate: KafkaTemplate<String, MessagePayload> = KafkaTemplate(DefaultKafkaProducerFactory(
+            mapOf(
+                ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
+                ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG to StringSerializer::class.java,
+                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG to JsonSerializer::class.java,
+            )
+        ))
+        kafkaTemplate.send(KafkaProperties.retryTopicName, MessagePayload(message = "good", count = 1))
     }
 }

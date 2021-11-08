@@ -6,3 +6,6 @@ POST http://localhost:8080/notify/producer/keys/2
 
 ###
 POST http://localhost:8080/notify/producer/ack
+
+###
+POST http://localhost:8080/notify/producer/retry

@@ -1,6 +1,7 @@
 package io.github.syakuis.kafka.notify.consumer
 
 import io.github.syakuis.kafka.KafkaProperties
+import io.github.syakuis.kafka.MessagePayload
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.annotation.TopicPartition
@@ -49,5 +50,15 @@ class NotifyConsumerService {
         log.debug("topic: {}, partition: {}, offset: {} -> {}", metadata.topic(), metadata.partition(), metadata.offset(), message)
         acknowledgment.acknowledge()
 //        acknowledgment.nack(5)
+    }
+
+    @KafkaListener(id = KafkaProperties.retryTopicName, containerFactory = "retryKafkaListenerFactory")
+    fun retryReceive(@Payload message: MessagePayload) {
+//        if (message.count > 1) {
+            log.error("{}", message)
+            throw IllegalArgumentException("오류 발생")
+//        } else {
+//            log.debug("{}", message)
+//        }
     }
 }
